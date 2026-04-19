@@ -332,7 +332,7 @@ public class ProfilesViewModel : MyReactiveObject
         {
             return;
         }
-        _config.SubIndexId = SelectedSub?.Id;
+        _config.SubIndexId = SelectedSub?.Id ?? "";
 
         await RefreshServers();
 
@@ -391,8 +391,8 @@ public class ProfilesViewModel : MyReactiveObject
         {
             SubItems.Add(item);
         }
-        SelectedSub = (_config.SubIndexId.IsNotEmpty()
-                        ? SubItems.FirstOrDefault(t => t.Id == _config.SubIndexId)
+        SelectedSub = (_config.SubIndexId != null
+                        ? SubItems.FirstOrDefault(t => (t.Id ?? "") == _config.SubIndexId)
                         : null) ?? SubItems.LastOrDefault();
     }
 
